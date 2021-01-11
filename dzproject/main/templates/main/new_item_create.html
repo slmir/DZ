@@ -1,37 +1,33 @@
 {% extends 'main/base_template.html' %}
 
 {% block title %}
-Создание записи о складе
+Создание записи о товаре
 {% endblock %}
 
 {% block content %}
     <h1>Создать запись о складе</h1>
-    <form method="post">
+    <form action="{% url 'item_create_url' %}" method="post">
         {% csrf_token %}
-
         {% for field in form %}
             <div class="form-group">
-                {% if filed.errors %}
+                {{ field }}
+                {% if field.errors %}
                     <div class="alert alert-danger">
                         {{ field.errors }}
                     </div>
                 {% endif %}
-
-
-
-                {{ field }}
             </div>
         {% endfor %}
 
 
         <button type="submit" class="btn btn-success" >Добавить</button>
-        {% if filed.errors %}
+       <!-- {% if filed.errors %}
                     <div class="alert alert-danger">
-                        <!--<span>{{ error }}</span>-->
+                        <span>{{ error }}</span>
                      </div>
                 {% endif %}
-
-        <a href="{% url 'thi'%}" class="btn btn-warning">Назад</a>
+-->
+        <a href="{% url 'sec'%}" class="btn btn-warning">Назад</a>
     </form>
 {% endblock %}
 

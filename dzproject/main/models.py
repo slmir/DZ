@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class Fold(models.Model):
+class FoldNew(models.Model):
     name = models.CharField('Название склада', max_length=50)
     parknumber = models.IntegerField('Номер платформы')
     responsible = models.CharField('Ответственный', max_length=50, blank=True)
@@ -9,15 +9,13 @@ class Fold(models.Model):
     def __str__(self):
         return str(self.name)
 
-
     def get_item_count(self):
         count = 0
-        items = Item.objects.all()
+        items = ItemNew.objects.all()
         for i in items:
             if i.foldid.id == self.id:
-                count+=1
+                count += 1
         return count
-
 
     def get_id(self):
         return self.id
@@ -30,7 +28,7 @@ class Fold(models.Model):
         verbose_name_plural = 'Склады'
 
 
-class Item(models.Model):
+class ItemNew(models.Model):
     ITEM_CATEGORY = (
         ('Мебель', 'Мебель'),
         ('Стройматериалы', 'Строительные материалы'),
@@ -42,7 +40,7 @@ class Item(models.Model):
     amount = models.IntegerField('Количество')
     shelflifeday = models.IntegerField('Дней хранения')
     option = models.TextField('Описание', blank=True)
-    foldid = models.ForeignKey(Fold, on_delete=models.CASCADE, verbose_name="Склад", blank="True")
+    foldid = models.ForeignKey(FoldNew, on_delete=models.CASCADE, verbose_name="Склад", blank="True")
 
     def __str__(self):
         return 'Наименование товара: ' + str(self.name) + '; Категория: ' + str(self.category)

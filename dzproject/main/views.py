@@ -1,9 +1,12 @@
 from django.shortcuts import render, redirect
-from .models import Fold, Item
-from .forms import WareHouseCreateForm, ItemCreateTestForm
-from django.views.generic import DetailView,UpdateView, DeleteView
+from .models import FoldNew, ItemNew
+from .forms import WareHouseCreateForm, ItemCreateTestForm, NewFoldCreateForm,NewItemCreateForm
+from django.views.generic import DetailView,UpdateView, DeleteView, View
 from django.db.models import F
 from django.http import HttpResponse,HttpResponseRedirect
+from django.contrib import messages
+
+
 
 
 def index(request):
@@ -11,8 +14,8 @@ def index(request):
 
 
 def first(request):
-    get_items = Item.objects.all()
-    get_folds = Fold.objects.all()
+    get_items = ItemNew.objects.all()
+    get_folds = FoldNew.objects.all()
 
 
     return render(request, 'main/first.html', {'title':"Примерный сводный отчет",
@@ -20,15 +23,49 @@ def first(request):
 
 
 def second(request):
-    items = Item.objects.all()
+    items = ItemNew.objects.all()
     return render(request, 'main/second.html', {'title':"Вторая страница сайта", 'item': items})
 
 
 def third(request):
     #warehouses = WareHouse.objects.find() - найти объект по его айди order - сортировка
-    warehouses = Fold.objects.all()
+    warehouses = FoldNew.objects.all()
     return render(request, 'main/third.html', {'title':"Третья страница сайта", 'warehouses': warehouses})
 
+
+class FoldCreate(View):
+    def get(self,request):
+        form = NewFoldCreateForm()
+        return render(request, 'main/new_fold_create.html',{'form' : form})
+
+    def post(self, request):
+        post_form = NewFoldCreateForm(request.POST)
+
+        if post_form.is_valid():
+            post_form.save()
+            return redirect('/third')
+        else:
+            return render(request, 'main/new_fold_create.html',{'form' : post_form})
+
+
+class ItemCreate(View):
+    def get(self,request):
+        form = NewItemCreateForm()
+        return render(request, 'main/new_item_create.html',{'form' : form})
+
+    def post(self, request):
+        post_form = NewItemCreateForm(request.POST)
+
+        if post_form.is_valid():
+            post_form.save()
+            return redirect('/second')
+        else:
+            return render(request, 'main/new_item_create.html',{'form' : post_form})
+
+
+def folds_home(request):
+    items = FoldNew.objects.all()
+    return render(request, 'main/folds_home.html', {'title': "Складыю. Главная", 'items': items})
 
 def createitem(request):
     error = ''
@@ -66,28 +103,29 @@ def createfold(request):
     return render(request, 'main/create_fold.html', context)
 
 
-def folds_home(request):
-    items = Fold.objects.all()
-    return render(request, 'main/folds_home.html', {'title': "Складыю. Главная", 'items': items})
+class FoldUpdate(View):
+    def get(self,request,id):
+        fold = FoldNew.objects.get(id__iexact=id)
+        bound_form=NewFoldCreateForm(instance=fold)
+        return render(request, 'main/update_new_fold.html', context={'form': bound_form, 'fold':fold})
 
 
 class FoldDetailView(DetailView):
-    model = Fold
+    model = FoldNew
     template_name = 'main/fold_detail.html'
     context_object_name = 'folds'
 
 
 class FoldUpdateView(UpdateView):
-    model = Fold
+    model = FoldNew
     template_name = 'main/update_fold.html'
 
     form_class = WareHouseCreateForm
 
 
 class FoldDeleteView(DeleteView):
-    model = Fold
+    model = FoldNew
     success_url = '/third'
     template_name = 'main/delete_fold.html'
 
     form_class = WareHouseCreateForm
-

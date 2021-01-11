@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import Fold, Item
+from .models import FoldNew, ItemNew
 
 
-admin.site.register(Fold)
-admin.site.register(Item)
+admin.site.register(FoldNew)
+admin.site.register(ItemNew)
