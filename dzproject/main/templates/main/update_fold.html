@@ -1,0 +1,23 @@
+{% extends 'main/base_template.html' %}
+
+{% block title %}
+Изменение записи о складе
+{% endblock %}
+
+{% block content %}
+    <h1>Редактировать запись о складе</h1>
+    <form method="post">
+        {% csrf_token %}
+        <p>Название склада: {{ form.name }}</p><br>
+        <p>Номер платформы: {{ form.parknumber }}</p><br>
+        <p>Ответсвенный: {{ form.responsible }}</p><br>
+        <button type="submit" class="btn btn-success">Изменить</button>
+        <span>{{ error }}</span>
+    </form>
+{% endblock %}
+
+{% block tomain %}
+  <footer class="footer">
+    <p align = "middle" class = "my-0 me-md-auto fw-normal p-2 text-white bg-dark align-items-center"><a href="{% url 'home' %}"><font color="white"><big>Главная</big></font></a></p>
+    </footer>
+{% endblock %}

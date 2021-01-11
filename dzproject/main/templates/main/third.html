@@ -1,0 +1,43 @@
+{% extends 'main/base_template.html' %}
+<!--получим данные из словаря по файлу views-->
+{% block title %}
+{{title}}
+{% endblock %}
+
+{% block content %}
+    {% if warehouses %}
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Название склада</th>
+              <th scope="col">Номер платформы</th>
+              <th scope="col">Ответсвенный</th>
+                <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+
+                {% for element in warehouses %}
+                 <tr>
+                        <th scope="row" >{{ element.id }}</th>
+                        <td> {{ element.name }}</td>
+                        <td>{{ element.parknumber }} </td>
+                        <td>{{ element.responsible }}</td>
+                        <td><a href="{% url 'fold-detail' element.id %}" class="btn btn-warning">Подробнее</a></td>
+                  </tr>
+                {% endfor %}
+
+          </tbody>
+        </table>
+    {% else %}
+            <p>Данные отсутвуют!</p>
+            {% endif %}
+{% endblock %}
+
+{% block tomain %}
+  <footer class="footer">
+    <p align = "middle" class = "my-0 me-md-auto fw-normal p-2 text-white bg-dark align-items-center"><a href="{% url 'home' %}"><font color="white"><big>Главная</big></font></a></p>
+    </footer>
+{% endblock %}

@@ -1,0 +1,34 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
+</head>
+
+<body>
+
+<header class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-dark border-bottom shadow-sm">
+  <nav class="my-3 my-md-0 me-md-3">
+    <a class="p-3 text-white" href="{% url 'home' %}">Главная</a>
+    <a class="p-3 text-white" href="{% url 'folds_home' %}">Склады</a>
+    <a class="p-3 text-white" href="{% url 'fir' %}">Первая страница</a>
+    <a class="p-3 text-white" href="{% url 'sec' %}">Данные о товарах</a>
+      <a class="p-3 text-white" href="{% url 'thi' %}">Данные о складах</a>
+    <a class="p-3 text-white" href="{% url 'createFold' %}">Создать запись о складе</a>
+      <a class="p-3 text-white" href="{% url 'createItem' %}">Создать запись о товаре</a>
+  </nav>
+</header>
+
+    <div class="content">
+        <div class="content-inside">
+        {% block content %}{% endblock %}
+        </div>
+    </div>
+    {% block tomain %}{% endblock %}
+
+</body>
+</html>

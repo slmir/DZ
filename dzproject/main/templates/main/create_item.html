@@ -1,0 +1,28 @@
+{% extends 'main/base_template.html' %}
+
+{% block title %}
+Создание записи о товаре
+{% endblock %}
+
+{% block content %}
+    <h1>Создать запись о товаре</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.name }}<br>
+        {{ form.category }}<br>
+        {{ form.amount }}<br>
+        {{ form.shelflifeday }}<br>
+        {{ form.option }}<br>
+        {{ form.foldid }}<br>
+        <button type="submit" class="btn btn-success" onclick="alert('Запись создана!');">Добавить</button>
+        <span>{{ error }}</span>
+
+        <a href="{% url 'sec'%}" class="btn btn-warning">Назад</a>
+    </form>
+{% endblock %}
+
+{% block tomain %}
+  <footer class="footer">
+    <p align = "middle" class = "my-0 me-md-auto fw-normal p-2 text-white bg-dark align-items-center"><a href="{% url 'home' %}"><font color="white"><big>Главная</big></font></a></p>
+    </footer>
+{% endblock %}
