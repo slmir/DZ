@@ -28,6 +28,7 @@
                         <td>{{ element.shelflifeday }}</td>
                         <td>{{ element.option }} </td>
                         <td>{{ element.foldid }}</td>
+                        <td><a href="{% url 'item-detail' element.id %}" class="btn btn-warning">Подробнее</a></td>
                   </tr>
                 {% endfor %}
 

@@ -14,11 +14,11 @@
         {{ form.shelflifeday }}<br>
         {{ form.option }}<br>
         {{ form.foldid }}<br>
-        <button type="submit" class="btn btn-success" onclick="alert('Запись создана!');">Добавить</button>
+        <button type="submit" class="btn btn-success">Добавить</button>
         <div class="alert alert-danger">
             <span>{{ error }}</span>
         </div>
-        <a href="{% url 'sec'%}" class="btn btn-warning">Назад</a>
+        <a href="{% url 'items_home'%}" class="btn btn-warning">Назад</a>
     </form>
 {% endblock %}
 

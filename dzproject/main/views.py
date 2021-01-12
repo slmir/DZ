@@ -43,7 +43,7 @@ class FoldCreate(View):
 
         if post_form.is_valid():
             post_form.save()
-            return redirect('/third')
+            return redirect('/folds')
         else:
             return render(request, 'main/new_fold_create.html',{'form' : post_form})
 
@@ -58,14 +58,19 @@ class ItemCreate(View):
 
         if post_form.is_valid():
             post_form.save()
-            return redirect('/second')
+            return redirect('/items')
         else:
             return render(request, 'main/new_item_create.html',{'form' : post_form})
 
 
 def folds_home(request):
-    items = FoldNew.objects.all()
-    return render(request, 'main/folds_home.html', {'title': "Складыю. Главная", 'items': items})
+    warehouses = FoldNew.objects.all()
+    return render(request, 'main/folds_home.html', {'title': "Третья страница сайта", 'warehouses': warehouses})
+
+
+def items_home(request):
+    items = ItemNew.objects.all()
+    return render(request, 'main/items_home.html', {'title': "Вторая страница сайта", 'item': items})
 
 def createitem(request):
     error = ''
@@ -73,7 +78,7 @@ def createitem(request):
         form = ItemCreateTestForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/second')
+            return redirect('/items')
         else:
             error = 'Данные на форме неверны!'
 
@@ -91,7 +96,7 @@ def createfold(request):
         form = WareHouseCreateForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('/third')
+            return redirect('/folds')
         else:
             error = 'Данные на форме неверны!'
 
@@ -126,7 +131,27 @@ class FoldUpdateView(UpdateView):
 
 class FoldDeleteView(DeleteView):
     model = FoldNew
-    success_url = '/third'
+    #form_class = NewFoldUpdateForm
+    success_url = '/folds'
     template_name = 'main/delete_fold.html'
 
-    form_class = WareHouseCreateForm
+
+class ItemDetailView(DetailView):
+    model = ItemNew
+    template_name = 'main/item_detail.html'
+    context_object_name = 'items'
+
+
+class ItemUpdateView(UpdateView):
+    model = ItemNew
+    template_name = 'main/update_new_item.html'
+
+    form_class = NewItemUpdateForm
+
+
+class ItemDeleteView(DeleteView):
+    model = ItemNew
+    success_url = '/items'
+    template_name = 'main/delete_new_item.html'
+
+#    form_class = WareHouseCreateForm

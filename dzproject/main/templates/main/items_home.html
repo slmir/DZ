@@ -1,0 +1,56 @@
+{% extends 'main/base_template.html' %}
+<!--получим данные из словаря по файлу views-->
+{% block title %}
+{{title}}
+{% endblock %}
+
+{% block content %}
+
+    <fieldset>
+        <h3>Создать запись о новом товаре</h3>
+        <a href="{% url 'item_create_url' %}" class="btn btn-success">Создать</a>
+    </fieldset>
+    <hr>
+<h3>Доступная информация о товарах:</h3>
+    <fieldset>
+    {% if item %}
+    <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Наименование товара</th>
+                  <th scope="col">Категория</th>
+                  <th scope="col">Количество(шт.)</th>
+                    <th scope="col">Дней хранения</th>
+                    <th scope="col">Описание</th>
+                    <th scope="col">Склад</th>
+                    <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                    {% for element in item %}
+                     <tr>
+                            <th scope="row">{{ element.id }}</th>
+                            <td>{{ element.name }}</td>
+                            <td>{{ element.category }} </td>
+                            <td>{{ element.amount }}</td>
+                            <td>{{ element.shelflifeday }}</td>
+                            <td>{{ element.option }} </td>
+                            <td>{{ element.foldid }}</td>
+                            <td><a href="{% url 'item-detail' element.id %}" class="btn btn-warning">Подробнее</a></td>
+                      </tr>
+                    {% endfor %}
+
+              </tbody>
+            </table>
+        {% else %}
+                <p>Данные отсутвуют!</p>
+                {% endif %}
+        </fieldset>
+{% endblock %}
+
+{% block tomain %}
+  <footer class="footer">
+    <p align = "middle" class = "my-0 me-md-auto fw-normal p-2 text-white bg-dark align-items-center"><a href="{% url 'home' %}"><font color="white"><big>Главная</big></font></a></p>
+    </footer>
+{% endblock %}

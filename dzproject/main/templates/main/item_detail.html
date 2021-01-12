@@ -1,19 +1,20 @@
 {% extends 'main/base_template.html' %}
 <!--получим данные из словаря по файлу views-->
 {% block title %}
-Подробнее о складе {{ folds.FoldName }}
+Подробнее о товаре {{ items.name }}
 {% endblock %}
 
 {% block content %}
 
-    <h1>{{ folds.name }}</h1>
+    <h1>{{ items.name }}</h1>
     <h2>Дополнительная информация:</h2>
-    <p>Номер платформы: {{ folds.parknumber }}</p>
-    <p>ФИО ответственного: {{ folds.responsible }}</p>
-    <a href= "{% url 'fold-delete' folds.id%}" class="btn btn-danger">Удалить</a>
-    <a href= "{% url 'fold-update' folds.id %}" class="btn btn-info">Редактировать</a>
+    <p>Категория: {{ items.category }}</p>
+    <p>Количество: {{ items.amount }}</p>
+    <p>Что то еще</p>
+    <a href= "{% url 'item-delete' items.id %}" class="btn btn-danger">Удалить</a>
+    <a href= "{% url 'item-update' items.id %}" class="btn btn-info">Редактировать</a>
 
-    <a href="{% url 'folds_home'%}" class="btn btn-warning">Назад</a>
+    <a href="{% url 'items_home'%}" class="btn btn-warning">Назад</a>
 
 {% endblock %}
 

@@ -1,12 +1,13 @@
 {% extends 'main/base_template.html' %}
 
 {% block title %}
-Создание записи о товаре
+ОБновление записи о товаре
 {% endblock %}
 
 {% block content %}
-    <h1>Создать запись о складе</h1>
-    <form action="{% url 'item_create_url' %}" method="post">
+    <h1>Обновить запись о складе</h1>
+<!--action="{% url 'item_create_url' %}"-->
+    <form  method="post">
         {% csrf_token %}
         {% for field in form %}
             <div class="form-group">
@@ -20,7 +21,7 @@
         {% endfor %}
 
 
-        <button type="submit" class="btn btn-success" >Добавить</button>
+        <button type="submit" class="btn btn-success" >Изменить</button>
        <!-- {% if filed.errors %}
                     <div class="alert alert-danger">
                         <span>{{ error }}</span>

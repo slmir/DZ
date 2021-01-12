@@ -5,7 +5,43 @@
 {% endblock %}
 
 {% block content %}
-<h1>УРА СКЛАДЫ</h1>
+ <fieldset>
+        <h3>Создать запись о новом складе</h3>
+        <a href="{% url 'fold_create_url' %}" class="btn btn-success">Создать</a>
+    </fieldset>
+    <hr>
+<h3>Доступная информация о складах:</h3>
+<fieldset>
+{% if warehouses %}
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Название склада</th>
+              <th scope="col">Номер платформы</th>
+              <th scope="col">Ответсвенный</th>
+                <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+
+                {% for element in warehouses %}
+                 <tr>
+                        <th scope="row" >{{ element.id }}</th>
+                        <td> {{ element.name }}</td>
+                        <td>{{ element.parknumber }} </td>
+                        <td>{{ element.responsible }}</td>
+                        <td><a href="{% url 'fold-detail' element.id %}" class="btn btn-warning">Подробнее</a></td>
+                  </tr>
+                {% endfor %}
+
+          </tbody>
+        </table>
+    {% else %}
+            <p>Данные отсутвуют!</p>
+            {% endif %}
+  </fieldset>
 {% endblock %}
 
 {% block tomain %}

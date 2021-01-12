@@ -2,12 +2,12 @@
 
 
 {% block title %}
-Удаление записи о складе
+Удаление записи о товаре
 {% endblock %}
 
 {% block content %}
 <form method="post">
-    <h1>Удаление записи о складе.</h1>
+    <h1>Удаление записи о товаре.</h1>
     {% csrf_token %}
 
     <fieldset>
@@ -19,13 +19,14 @@
             });
         </script>
         <div class="form-check">
-        <input class="form-check-input" type="checkbox" name="Confirm" id="toggleP" value="a1" checked>Я подтверждаю, что хочу удалить запись<Br>
+        <input class="form-check-input" type="checkbox" name="Confirm" id="toggleP" value="a1" checked>Я подтверждаю, что хочу удалить запись.
         </div>
         <p id="hidethis">
             <button type="submit" class="btn btn-success" id="butt" >Удалить</button>
         </p>
     </fieldset>
-    <input class="btn btn-warning" value="Назад" onClick="javascript:history.go(-1);"></input>
+        <input class="btn btn-warning" value="Назад" onClick="javascript:history.go(-1);"></input>
+
 
         <span>{{ error }}</span>
     </form>

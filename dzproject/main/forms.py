@@ -258,5 +258,72 @@ class NewItemCreateForm(forms.ModelForm):
         return new_days
 
 
+class NewItemUpdateForm(forms.ModelForm):
 
+    class Meta:
+        model = ItemNew
+        folds = FoldNew.objects.all()
+        category = (
+            ('Мебель'),
+            ('Стройматериалы'),
+            ('Инструменты'),
+            ('Техника'),
+        )
+        fields = ['name', 'category', 'amount', 'shelflifeday', 'option', 'foldid']
+        widgets = {
+            "name": TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Введите наименование товара',
+            }),
+            "category": Select(attrs={
+                'class': 'form-control',
+                'placeholder': 'Выберите категорию'
+            }, choices=category),
+            "amount": TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Введите количество (шт.)'
+            }),
+            "shelflifeday": TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Введите срок хранения (дней)'
+            }),
+            "option": TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Введите описание (необязательно)'
+            }),
+            "foldid": Select(attrs={
+                'class': 'form-control',
+                'placeholder': 'Выбирете склад'
+            }, choices=folds),
+
+        }
+
+
+
+    def clean_amount(self):
+        new_amount = self.cleaned_data['amount']
+
+        if new_amount <= 0:
+            raise ValidationError('Запись о количестве товара должна быть целым неотрицательным числом!')
+
+        return new_amount
+
+    def clean_shelflifeday(self):
+        new_days = self.cleaned_data['shelflifeday']
+
+        if new_days <= 0:
+            raise ValidationError('Запись о количестве дней хранения должна быть целым неотрицательным числом!')
+
+        return new_days
+
+"""    def clean_name(self):
+        new_name = self.cleaned_data['name']
+
+        return new_name
+
+        if new_name.has_changed():
+            if ItemNew.objects.filter(name__iexact=new_name).count():
+                raise ValidationError(
+                    'Наименование товара должно быть уникальным. В записях уже существует товар "{}"'.format(
+                        new_name.changed_data))"""
 

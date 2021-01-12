@@ -5,6 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link href="/docs/5.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
 </head>
@@ -15,13 +17,7 @@
   <nav class="my-3 my-md-0 me-md-3">
     <a class="p-3 text-white" href="{% url 'home' %}">Главная</a>
     <a class="p-3 text-white" href="{% url 'folds_home' %}">Склады</a>
-    <a class="p-3 text-white" href="{% url 'fir' %}">Первая страница</a>
-    <a class="p-3 text-white" href="{% url 'sec' %}">Данные о товарах</a>
-      <a class="p-3 text-white" href="{% url 'thi' %}">Данные о складах</a>
-    <a class="p-3 text-white" href="{% url 'createFold' %}">Создать запись о складе</a>
-      <a class="p-3 text-white" href="{% url 'createItem' %}">Создать запись о товаре</a>
-  <a class="p-3 text-white" href="{% url 'fold_create_url' %}">Создать запись о складе(через формы)</a>
-<a class="p-3 text-white" href="{% url 'item_create_url' %}">Создать запись о товаре(через формы)</a>
+    <a class="p-3 text-white" href="{% url 'items_home' %}">Товары</a>
 
   </nav>
 </header>

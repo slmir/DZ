@@ -33,6 +33,7 @@ class FoldNew(models.Model):
 
 
 class ItemNew(models.Model):
+    __original_name = None
     ITEM_CATEGORY = (
         ('Мебель', 'Мебель'),
         ('Стройматериалы', 'Строительные материалы'),
@@ -46,11 +47,21 @@ class ItemNew(models.Model):
     option = models.TextField('Описание', blank=True)
     foldid = models.ForeignKey(FoldNew, on_delete=models.CASCADE, verbose_name="Склад", blank="True")
 
+    def __init__(self, *args,**kwargs):
+        super(ItemNew,self).__init__(*args,**kwargs)
+        self.__original_name = self.name
+
     def __str__(self):
         return 'Наименование товара: ' + str(self.name) + '; Категория: ' + str(self.category)
 
     def get_id(self):
         return self.foldid.id
+
+    def get_name(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return f'/items/{self.id}'
 
     class Meta:
         verbose_name = 'Товар'
