@@ -1,4 +1,5 @@
 from django.db import models
+from django.shortcuts import reverse
 
 
 class FoldNew(models.Model):
@@ -23,6 +24,9 @@ class FoldNew(models.Model):
     def get_absolute_url(self):
         return f'/folds/{self.id}'
 
+    """def get_update_url(self):
+        return reverse('fold_update_url',kwargs={'id': self.id})
+"""
     class Meta:
         verbose_name = 'Склад'
         verbose_name_plural = 'Склады'

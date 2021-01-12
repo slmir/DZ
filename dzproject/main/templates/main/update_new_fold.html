@@ -5,8 +5,9 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Создать запись о складе</h1>
-    <form action="{% url 'fold_update_url' id=fold.id %}" method="post">
+    <h1>Обновить запись о складе</h1>
+
+    <form method="post">
         {% csrf_token %}
         {% for field in form %}
             <div class="form-group">

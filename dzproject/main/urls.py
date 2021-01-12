@@ -8,7 +8,7 @@ urlpatterns = [
 
     path('create-fold', views.FoldCreate.as_view(), name='fold_create_url'),
     path('create-item', views.ItemCreate.as_view(), name='item_create_url'),
-   # path('folds/<int:pk>/update/', views.FoldUpdate.as_view(), name='fold_update_url'),
+    #path('folds/<int:pk>/update', views.FoldUpdate.as_view(), name='fold_update_url'),
 
     path('first',views.first, name='fir'),
     path('second',views.second, name='sec'),

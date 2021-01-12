@@ -114,6 +114,40 @@ class NewFoldCreateForm(forms.ModelForm):
         return new_parknumber
 
 
+class NewFoldUpdateForm(forms.ModelForm):
+    class Meta:
+        model = FoldNew
+        fields = ["name", "parknumber", "responsible"]
+        widgets = {
+            "name": TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Введите название склада'
+            }),
+            "parknumber": TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Введите номер платформы'
+            }),
+            "responsible": TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Введите ФИО ответственного (необязательно)'
+            }),
+        }
+
+    def clean_name(self):
+        new_name = self.cleaned_data['name']
+
+        if new_name == 'create':
+            raise ValidationError('Запись о складе с таким именем не может быть создана!')
+
+        return new_name
+
+    def clean_parknumber(self):
+        new_parknumber = self.cleaned_data['parknumber']
+
+        if new_parknumber <= 0:
+            raise ValidationError('Запись о номере платформы разгрузки должна быть целым неотрицательным числом!')
+
+        return new_parknumber
 """
 class NewItemCreateForm(forms.Form):
     folds = FoldNew.objects.all()

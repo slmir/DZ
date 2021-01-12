@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import FoldNew, ItemNew
-from .forms import WareHouseCreateForm, ItemCreateTestForm, NewFoldCreateForm,NewItemCreateForm
+from .forms import *
 from django.views.generic import DetailView,UpdateView, DeleteView, View
 from django.db.models import F
 from django.http import HttpResponse,HttpResponseRedirect
@@ -103,12 +103,12 @@ def createfold(request):
     return render(request, 'main/create_fold.html', context)
 
 
-class FoldUpdate(View):
-    def get(self,request,id):
-        fold = FoldNew.objects.get(id__iexact=id)
+"""class FoldUpdate(View):
+    def get(self,request):
+        fold = FoldNew.objects.get(id__iexact=self.id)
         bound_form=NewFoldCreateForm(instance=fold)
-        return render(request, 'main/update_new_fold.html', context={'form': bound_form, 'fold':fold})
-
+        return render(request, 'main/update_new_fold.html', context={'form': bound_form, 'folds': fold})
+"""
 
 class FoldDetailView(DetailView):
     model = FoldNew
@@ -118,9 +118,10 @@ class FoldDetailView(DetailView):
 
 class FoldUpdateView(UpdateView):
     model = FoldNew
-    template_name = 'main/update_fold.html'
+    template_name = 'main/update_new_fold.html'
 
-    form_class = WareHouseCreateForm
+#    form_class = NewFoldCreateForm
+    form_class = NewFoldUpdateForm
 
 
 class FoldDeleteView(DeleteView):
