@@ -11,32 +11,27 @@
         <a href="{% url 'item_create_url' %}" class="btn btn-success">Создать</a>
     </fieldset>
     <hr>
+<fieldset>
+        <h3>Отчет с полной информацией о товарах доступен по кнопке:</h3>
+        <a href="{% url 'items_list' %}" class="btn btn-info">Открыть отчет</a>
+    </fieldset>
+    <hr>
 <h3>Доступная информация о товарах:</h3>
     <fieldset>
     {% if item %}
     <table class="table">
               <thead>
                 <tr>
-                  <th scope="col">#</th>
                   <th scope="col">Наименование товара</th>
                   <th scope="col">Категория</th>
-                  <th scope="col">Количество(шт.)</th>
-                    <th scope="col">Дней хранения</th>
-                    <th scope="col">Описание</th>
-                    <th scope="col">Склад</th>
                     <th scope="col"></th>
                 </tr>
               </thead>
               <tbody>
                     {% for element in item %}
                      <tr>
-                            <th scope="row">{{ element.id }}</th>
-                            <td>{{ element.name }}</td>
+                            <th scope="row">{{ element.name }}</th>
                             <td>{{ element.category }} </td>
-                            <td>{{ element.amount }}</td>
-                            <td>{{ element.shelflifeday }}</td>
-                            <td>{{ element.option }} </td>
-                            <td>{{ element.foldid }}</td>
                             <td><a href="{% url 'item-detail' element.id %}" class="btn btn-warning">Подробнее</a></td>
                       </tr>
                     {% endfor %}

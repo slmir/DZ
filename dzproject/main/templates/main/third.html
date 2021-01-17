@@ -10,21 +10,24 @@
         <table class="table">
           <thead>
             <tr>
-              <th scope="col">#</th>
               <th scope="col">Название склада</th>
               <th scope="col">Номер платформы</th>
               <th scope="col">Ответсвенный</th>
+                <th scope="col">Адрес</th>
+              <th scope="col">Площадь склада(м2)</th>
                 <th scope="col"></th>
+
             </tr>
           </thead>
           <tbody>
 
                 {% for element in warehouses %}
                  <tr>
-                        <th scope="row" >{{ element.id }}</th>
-                        <td> {{ element.name }}</td>
+                        <th scope="row" > {{ element.name }}</th>
                         <td>{{ element.parknumber }} </td>
                         <td>{{ element.responsible }}</td>
+                     <td>{{ element.adress }} </td>
+                        <td>{{ element.square }}</td>
                         <td><a href="{% url 'fold-detail' element.id %}" class="btn btn-warning">Подробнее</a></td>
                   </tr>
                 {% endfor %}

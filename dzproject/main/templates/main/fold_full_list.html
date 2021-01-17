@@ -1,0 +1,50 @@
+{% extends 'main/base_template.html' %}
+<!--получим данные из словаря по файлу views-->
+{% block title %}
+{{title}}
+{% endblock %}
+
+{% block content %}
+<input style="width:250px" class="btn btn-warning" value="Вернуться к главной странице складов" onClick="javascript:history.go(-1);"></input>
+
+<hr>
+<h3>Доступная информация о складах:</h3>
+    <fieldset>
+    {% if fold %}
+    <table class="table table-striped">
+              <thead>
+                <tr>
+                   <th scope="col">Название склада</th>
+                    <th scope="col">Номер платформы</th>
+                    <th scope="col">Ответсвенный</th>
+                    <th scope="col">Адрес</th>
+                    <th scope="col">Площадь склада (м2)</th>
+                    <th scope="col"></th>
+
+                </tr>
+              </thead>
+              <tbody>
+                    {% for element in fold %}
+                     <tr>
+                             <th scope="row" > {{ element.name }}</th>
+                        <td>{% if element.parknumber != ''%} {{ element.parknumber }} {% else %} Данные не указаны {% endif %}</td>
+                        <td>{% if element.responsible != ''%} {{ element.responsible }} {% else %} Данные не указаны {% endif %}</td>
+                        <td>{% if element.adress != ''%} {{ element.adress }} {% else %} Данные не указаны {% endif %}</td>
+                        <td>{{ element.square }}</td>
+                            <!--<td><a href="{% url 'item-detail' element.id %}" class="btn btn-warning">Подробнее</a></td>-->
+                     </tr>
+                    {% endfor %}
+
+              </tbody>
+            </table>
+        {% else %}
+                <p>Данные отсутвуют!</p>
+                {% endif %}
+        </fieldset>
+{% endblock %}
+
+{% block tomain %}
+  <footer class="footer">
+    <p align = "middle" class = "my-0 me-md-auto fw-normal p-2 text-white bg-dark align-items-center"><a href="{% url 'home' %}"><font color="white"><big>Главная</big></font></a></p>
+    </footer>
+{% endblock %}

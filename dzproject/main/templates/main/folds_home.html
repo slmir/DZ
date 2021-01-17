@@ -5,11 +5,17 @@
 {% endblock %}
 
 {% block content %}
- <fieldset>
+<fieldset>
         <h3>Создать запись о новом складе</h3>
         <a href="{% url 'fold_create_url' %}" class="btn btn-success">Создать</a>
     </fieldset>
     <hr>
+<fieldset>
+        <h3>Отчет с полной информацией о складах доступен по кнопке:</h3>
+        <a href="{% url 'folds_list' %}" class="btn btn-info">Открыть отчет</a>
+    </fieldset>
+    <hr>
+
 <h3>Доступная информация о складах:</h3>
 <fieldset>
 {% if warehouses %}
@@ -17,21 +23,16 @@
         <table class="table">
           <thead>
             <tr>
-              <th scope="col">#</th>
               <th scope="col">Название склада</th>
-              <th scope="col">Номер платформы</th>
-              <th scope="col">Ответсвенный</th>
                 <th scope="col"></th>
+
             </tr>
           </thead>
           <tbody>
 
                 {% for element in warehouses %}
                  <tr>
-                        <th scope="row" >{{ element.id }}</th>
-                        <td> {{ element.name }}</td>
-                        <td>{{ element.parknumber }} </td>
-                        <td>{{ element.responsible }}</td>
+                        <th scope="row" > {{ element.name }}</th>
                         <td><a href="{% url 'fold-detail' element.id %}" class="btn btn-warning">Подробнее</a></td>
                   </tr>
                 {% endfor %}

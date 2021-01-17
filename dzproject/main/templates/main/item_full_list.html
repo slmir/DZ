@@ -1,0 +1,58 @@
+{% extends 'main/base_template.html' %}
+<!--получим данные из словаря по файлу views-->
+{% block title %}
+{{title}}
+{% endblock %}
+
+{% block content %}
+<input style="width:250px" class="btn btn-warning" value="Вернуться к главной странице товаров" onClick="javascript:history.go(-1);"></input>
+
+<hr>
+<h3>Доступная информация о товарах:</h3>
+    <fieldset>
+    {% if item %}
+    <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Наименование товара</th>
+                  <th scope="col">Категория</th>
+                  <th scope="col">Количество(шт.)</th>
+                    <th scope="col">Дней хранения</th>
+                    <th scope="col">Описание</th>
+                    <th scope="col">Склад</th>
+                    <th scope="col">Модуль склада</th>
+                    <th scope="col">Секция модуля склада</th>
+                    <th scope="col">Ряд</th>
+                    <th scope="col">Место</th>
+                </tr>
+              </thead>
+              <tbody>
+                    {% for element in item %}
+                     <tr>
+                            <th scope="row">{{ element.name }}</th>
+                            <td>{{ element.category }} </td>
+                            <td>{{ element.amount }}</td>
+                            <td>{{ element.shelflifeday }}</td>
+                            <td>{% if element.option != ''%} {{ element.option }} {% else %} Данные не указаны {% endif %}</td>
+                            <td>{{ element.foldid }}</td>
+                            <td>{% if element.module != ''%} {{ element.module }} {% else %} Данные не указаны {% endif %}</td>
+                            <td>{% if element.section != ''%} {{ element.section }} {% else %} Данные не указаны {% endif %}</td>
+                            <td>{% if element.row != ''%} {{ element.row }} {% else %} Данные не указаны {% endif %} </td>
+                            <td>{% if element.place != ''%} {{ element.place }} {% else %} Данные не указаны {% endif %}</td>
+                         <!--<td><a href="{% url 'item-detail' element.id %}" class="btn btn-warning">Подробнее</a></td>-->
+                      </tr>
+                    {% endfor %}
+
+              </tbody>
+            </table>
+        {% else %}
+                <p>Данные отсутвуют!</p>
+                {% endif %}
+        </fieldset>
+{% endblock %}
+
+{% block tomain %}
+  <footer class="footer">
+    <p align = "middle" class = "my-0 me-md-auto fw-normal p-2 text-white bg-dark align-items-center"><a href="{% url 'home' %}"><font color="white"><big>Главная</big></font></a></p>
+    </footer>
+{% endblock %}

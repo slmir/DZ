@@ -9,7 +9,9 @@
     <h1>{{ folds.name }}</h1>
     <h2>Дополнительная информация:</h2>
     <p>Номер платформы: {{ folds.parknumber }}</p>
-    <p>ФИО ответственного: {{ folds.responsible }}</p>
+    <p>ФИО ответственного: {% if folds.responsible != ''%} {{ folds.responsible }} {% else %} Данные не указаны {% endif %}</p>
+    <p>Адресс склада: {% if folds.adress != ''%} {{ folds.adress }} {% else %} Данные не указаны {% endif %}</p>
+    <p>ФИО ответственного: {{ folds.square }}</p>
     <a href= "{% url 'fold-delete' folds.id%}" class="btn btn-danger">Удалить</a>
     <a href= "{% url 'fold-update' folds.id %}" class="btn btn-info">Редактировать</a>
 

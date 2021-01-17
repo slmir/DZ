@@ -8,7 +8,7 @@
 {% if get_fold %}
     {% if get_item %}
         {% for fold_elem in get_fold %}
-            <h2>{{ fold_elem.name }}</h2>
+            <h2>Склад: {{ fold_elem.name }}</h2>
             {% if fold_elem.get_item_count > 0%}
             <br>
             <table class="table table-striped table-bordered">
